@@ -1,3 +1,6 @@
+#key
+lab-key.pem
+
 # Local .terraform directories
 **/.terraform/*
 
