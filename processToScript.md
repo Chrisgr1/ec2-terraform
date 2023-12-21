@@ -1,18 +1,8 @@
 # Connect to ssh
 ssh -i "lab-key.pem" ubuntu@ec2-[IP with dashes instead of dots].compute-1.amazonaws.com
+
 # Update and Upgrade Ubuntu Packages
 sudo apt-get update -y && sudo apt-get upgrade -y
-
-# Clone GitHub Repository
-mkdir myapp
-git clone https://github.com/Chrisgr1/Codeclan22_W5_Project_Bucket_List.git myapp
-cd myapp
-mkdir secrets
-cd secrets
-touch db-root-password.txt
-password > db-root-password.txt
-cd ..
-
 
 # Install Docker
 sudo apt-get install docker.io -y
@@ -21,9 +11,31 @@ sudo systemctl start docker
 sudo usermod -aG docker $USER
 sudo docker-compose up
 
+# Clone GitHub Repository
+mkdir myapp
+git clone https://github.com/Chrisgr1/Codeclan22_W5_Project_Bucket_List.git myapp
+cd myapp
+mkdir secrets
+cd secrets
+touch db-root-password.txt
+echo "password" > /home/ubuntu/myapp/secrets/db-root-password.txt
+cd ..
+
+sudo apt-get install python3 python3-pip -y
+pip3 install -r requirements.txt
+python3 app.py
+
+
+# Using Docker Docker
+sudo apt-get install docker.io -y
+sudo apt-get install docker-compose #This is not correct
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+sudo docker-compose up
+
 # Optional tests
  sudo docker --version
-    docker compose version
+  sudo docker-compose version
     sudo docker run hello-world
     sudo docker images
     sudo docker ps -a
